@@ -1,31 +1,85 @@
-import { StyleSheet } from 'react-native';
+import React from "react";
+import {
+  StyleSheet,
+  Image,
+  ScrollView,
+  View,
+  Text,
+  SafeAreaView,
+} from "react-native";
+import { StatusBar } from "expo-status-bar";
 
-import EditScreenInfo from '@/components/EditScreenInfo';
-import { Text, View } from '@/components/Themed';
-
-export default function TabOneScreen() {
+export default function App() {
   return (
-    <View style={styles.container}>
-      <Text style={styles.title}>Tab One</Text>
-      <View style={styles.separator} lightColor="#eee" darkColor="rgba(255,255,255,0.1)" />
-      <EditScreenInfo path="app/(tabs)/index.tsx" />
-    </View>
+    <SafeAreaView style={styles.safeArea}>
+      <StatusBar style="light" />
+      <ScrollView contentContainerStyle={styles.scrollViewContent}>
+        <View style={styles.container}>
+          <Image source={require("@/assets/images/favicon.png")}></Image>
+        </View>
+        <View style={styles.container2}>
+          <Image source={require("@/assets/images/favicon.png")}></Image>
+        </View>
+        <View style={styles.container2}>
+          <Image source={require("@/assets/images/favicon.png")}></Image>
+        </View>
+        <View style={styles.container2}>
+          <Image source={require("@/assets/images/favicon.png")}></Image>
+        </View>
+      </ScrollView>
+    </SafeAreaView>
   );
 }
 
 const styles = StyleSheet.create({
-  container: {
+  safeArea: {
     flex: 1,
-    alignItems: 'center',
-    justifyContent: 'center',
   },
-  title: {
-    fontSize: 20,
-    fontWeight: 'bold',
+  scrollViewContent: {
+    flexGrow: 1,
+
+    paddingVertical: 20,
   },
-  separator: {
-    marginVertical: 30,
-    height: 1,
-    width: '80%',
+  container: {
+    flex: 3,
+    width: "100%",
+    height: 400,
+    alignItems: "center",
+    backgroundColor: "red",
+  },
+  container2: {
+    flex: 1,
+    width: "100%",
+    height: 200,
+    alignItems: "center",
+    borderWidth: 1,
+    borderColor: "white",
+  },
+  header: {
+    fontSize: 24,
+    fontWeight: "bold",
+    marginVertical: 20,
+    color: "white",
+  },
+  itemContainer: {
+    width: "90%",
+    backgroundColor: "#f9f9f9",
+    padding: 20,
+    marginVertical: 10,
+    alignItems: "center",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOpacity: 0.1,
+    shadowRadius: 10,
+  },
+  image: {
+    width: 100,
+    height: 100,
+    resizeMode: "contain",
+  },
+  itemText: {
+    marginTop: 10,
+    fontSize: 18,
+    color: "#333",
   },
 });
