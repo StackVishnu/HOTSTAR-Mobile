@@ -6,7 +6,6 @@ import CustomHeader from "@/components/CustomHeader";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
-import { MaterialIcons } from "@expo/vector-icons";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -15,9 +14,18 @@ function TabBarIcon(props: {
 }) {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
 }
+type ImgHeaderProps = {
+  src: any;
+  style?: object;
+};
+function ImageHeader({ src, style }: ImgHeaderProps) {
+  return <Image source={src} style={style} />;
+}
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
+  const headerImgSrc = require("@/assets/images/disney-logo.png");
+  const headerImgStyle = styles.headerImg;
 
   return (
     <Tabs
@@ -31,10 +39,8 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "Home",
-          tabBarIcon: ({ color }) => (
-            <MaterialIcons name="home-filled" size={24} color={color} />
-          ),
+          title: "",
+          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
           header: () => <CustomHeader />,
         }}
       />

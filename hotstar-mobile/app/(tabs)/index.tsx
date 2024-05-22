@@ -9,6 +9,7 @@ import {
   Image,
   ScrollView,
   TouchableOpacity,
+  Dimensions,
 } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
@@ -17,6 +18,7 @@ import { StatusBar } from "expo-status-bar";
 import { fetchMovies, Movie } from "@/services/apiService";
 import SnapCarousel from "@/components/titleCarousel";
 import { titleData } from "@/data/movieData";
+const { width, height } = Dimensions.get("window");
 
 const App: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -133,7 +135,7 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     flexGrow: 1,
-    paddingVertical: 25,
+    paddingVertical: height * 0.03,
   },
   gradient: {
     position: "absolute",

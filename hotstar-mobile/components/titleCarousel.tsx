@@ -41,7 +41,7 @@ const SnapCarousel: FC<SnapCarouselProps> = ({
 
 const styles = StyleSheet.create({
   wrapper: {
-    height: Dimensions.get("window").height * 0.4, // Adjust height as needed
+    height: height * 0.4, // Adjust height as needed
   },
   card: {
     flex: 1,
