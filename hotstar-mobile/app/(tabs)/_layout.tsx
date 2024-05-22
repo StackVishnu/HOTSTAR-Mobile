@@ -15,18 +15,9 @@ function TabBarIcon(props: {
 }) {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
 }
-type ImgHeaderProps = {
-  src: any;
-  style?: object;
-};
-function ImageHeader({ src, style }: ImgHeaderProps) {
-  return <Image source={src} style={style} />;
-}
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const headerImgSrc = require("@/assets/images/disney-logo.png");
-  const headerImgStyle = styles.headerImg;
 
   return (
     <Tabs
@@ -40,9 +31,9 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "tab ",
+          title: "Home",
           tabBarIcon: ({ color }) => (
-            <MaterialIcons name="home-filled" size={24} color="white" />
+            <MaterialIcons name="home-filled" size={24} color={color} />
           ),
           header: () => <CustomHeader />,
         }}
