@@ -11,6 +11,7 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { fetchMovies, Movie } from "@/services/apiService";
+import { titleData } from "@/data/movieData";
 
 const App: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -73,22 +74,6 @@ const App: React.FC = () => {
         </View>
       </ScrollView>
     </SafeAreaView>
-    // <SafeAreaView style={styles.safeArea}>
-    //   <StatusBar style="light" />
-    //   {loading ? (
-    //     <ActivityIndicator size="large" color="#0000ff" />
-    //   ) : error ? (
-    //     <Text style={styles.scrollTitle}>Error: {error}</Text>
-    //   ) : (
-    //     <FlatList
-    //       data={movies}
-    //       horizontal
-    //       keyExtractor={(item) => item.id}
-    //       renderItem={renderItem}
-    //       contentContainerStyle={styles.listContent}
-    //     />
-    //   )}
-    // </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
