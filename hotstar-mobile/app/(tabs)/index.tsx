@@ -8,7 +8,11 @@ import {
   SafeAreaView,
   Image,
   ScrollView,
+  TouchableOpacity,
 } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { fetchMovies, Movie } from "@/services/apiService";
 import SnapCarousel from "@/components/titleCarousel";
@@ -18,8 +22,10 @@ const App: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const handleSnapToItem = (index: number) => {
+    setCurrentIndex(index);
     console.log("Snapped to item:", index);
   };
   useEffect(() => {
@@ -52,7 +58,32 @@ const App: React.FC = () => {
       <StatusBar style="light" />
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.container}>
+          <Image
+            source={{
+              uri: titleData[currentIndex].bgImg,
+            }}
+            style={styles.bgImg}
+          />
+          <LinearGradient
+            colors={["transparent", "rgba(0,0,0,1)"]}
+            style={styles.gradient}
+          />
           <SnapCarousel data={titleData} onSnapToItem={handleSnapToItem} />
+
+          <View style={styles.subscribeBtn}>
+            <TouchableOpacity style={styles.btnContainer}>
+              <Text style={styles.btn1}>
+                <Entypo name="controller-play" size={16} color="white" />
+                Watch Now
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.btnContainer}>
+              <Text style={styles.btn2}>
+                <AntDesign name="plus" size={20} color="white" />
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.container2}>
           <Text style={styles.scrollTitle}>Latest</Text>
@@ -102,29 +133,32 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     flexGrow: 1,
-
-    paddingVertical: 20,
+    paddingVertical: 25,
+  },
+  gradient: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 100,
+    height: "50%",
   },
   container: {
-    flex: 3,
     width: "100%",
-    height: 400,
+    height: 500,
     alignItems: "center",
-    backgroundColor: "red",
+    backgroundColor: "black",
   },
   container2: {
     flex: 1,
     width: "100%",
     height: 220,
     alignItems: "center",
-    borderColor: "white",
-    borderWidth: 1,
   },
 
   image: {
-    width: 100,
+    width: "100%",
     height: 100,
-    resizeMode: "contain",
+    objectFit: "cover",
   },
   itemText: {
     marginTop: 10,
@@ -157,6 +191,33 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: 10,
+  },
+  subscribeBtn: {
+    flexDirection: "row",
+    position: "absolute",
+    bottom: 40,
+  },
+  bgImg: {
+    position: "absolute",
+    height: "80%",
+    width: "100%",
+  },
+  btnContainer: {
+    padding: 10,
+  },
+  btn1: {
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    color: "white",
+    paddingHorizontal: 40,
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  btn2: {
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    color: "white",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 5,
   },
 });
 // const styles = StyleSheet.create({

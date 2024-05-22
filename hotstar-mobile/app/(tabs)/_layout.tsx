@@ -6,6 +6,7 @@ import CustomHeader from "@/components/CustomHeader";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
+import { MaterialIcons } from "@expo/vector-icons";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
@@ -40,7 +41,9 @@ export default function TabLayout() {
         name="index"
         options={{
           title: "tab ",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="home-filled" size={24} color="white" />
+          ),
           header: () => <CustomHeader />,
         }}
       />
