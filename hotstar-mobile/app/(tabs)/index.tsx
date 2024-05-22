@@ -11,12 +11,17 @@ import {
 } from "react-native";
 import { StatusBar } from "expo-status-bar";
 import { fetchMovies, Movie } from "@/services/apiService";
+import SnapCarousel from "@/components/titleCarousel";
+import { titleData } from "@/data/movieData";
 
 const App: React.FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
+  const handleSnapToItem = (index: number) => {
+    console.log("Snapped to item:", index);
+  };
   useEffect(() => {
     const loadMovies = async () => {
       try {
@@ -47,7 +52,7 @@ const App: React.FC = () => {
       <StatusBar style="light" />
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.container}>
-          <Image source={require("@/assets/images/favicon.png")}></Image>
+          <SnapCarousel data={titleData} onSnapToItem={handleSnapToItem} />
         </View>
         <View style={styles.container2}>
           <Text style={styles.scrollTitle}>Latest</Text>
