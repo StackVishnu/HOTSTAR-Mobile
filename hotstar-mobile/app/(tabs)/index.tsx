@@ -3,8 +3,6 @@ import {
   StyleSheet,
   View,
   Text,
-  FlatList,
-  ActivityIndicator,
   SafeAreaView,
   Image,
   ScrollView,
@@ -19,42 +17,15 @@ import { fetchMovies, Movie } from "@/services/apiService";
 import SnapCarousel from "@/components/titleCarousel";
 import { titleData } from "@/data/movieData";
 const { width, height } = Dimensions.get("window");
+import MovieGrid from "@/components/MovieGrid";
 
 const App: React.FC = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
   const [currentIndex, setCurrentIndex] = useState<number>(0);
 
   const handleSnapToItem = (index: number) => {
     setCurrentIndex(index);
-    console.log("Snapped to item:", index);
   };
-  useEffect(() => {
-    const loadMovies = async () => {
-      try {
-        const result = await fetchMovies();
-        setMovies(result);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unknown error occurred");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
 
-    loadMovies();
-  }, []);
-
-  const renderItem = ({ item }: { item: Movie }) => (
-    <View style={styles.card}>
-      {/* <Text style={styles.title}>{item.title}</Text> */}
-      <Image source={{ uri: item.posterURL }} style={styles.poster} />
-    </View>
-  );
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="light" />
@@ -88,45 +59,16 @@ const App: React.FC = () => {
           </View>
         </View>
         <View style={styles.container2}>
-          <Text style={styles.scrollTitle}>Latest</Text>
-          {loading ? (
-            <ActivityIndicator size="large" color="#0000ff" />
-          ) : error ? (
-            <Text style={styles.scrollTitle}>Error: {error}</Text>
-          ) : (
-            <FlatList
-              data={movies}
-              horizontal
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={renderItem}
-              contentContainerStyle={styles.listContent}
-            />
-          )}
+          <MovieGrid genre="Animation" />
         </View>
         <View style={styles.container2}>
-          <Image source={require("@/assets/images/favicon.png")}></Image>
+          <MovieGrid genre="Horror" />
         </View>
         <View style={styles.container2}>
           <Image source={require("@/assets/images/favicon.png")}></Image>
         </View>
       </ScrollView>
     </SafeAreaView>
-    // <SafeAreaView style={styles.safeArea}>
-    //   <StatusBar style="light" />
-    //   {loading ? (
-    //     <ActivityIndicator size="large" color="#0000ff" />
-    //   ) : error ? (
-    //     <Text style={styles.scrollTitle}>Error: {error}</Text>
-    //   ) : (
-    //     <FlatList
-    //       data={movies}
-    //       horizontal
-    //       keyExtractor={(item) => item.id}
-    //       renderItem={renderItem}
-    //       contentContainerStyle={styles.listContent}
-    //     />
-    //   )}
-    // </SafeAreaView>
   );
 };
 const styles = StyleSheet.create({
