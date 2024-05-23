@@ -40,10 +40,12 @@ const MovieGrid: React.FC<MovieGridProps> = ({ genre }) => {
   }, []);
 
   const renderItem = ({ item }: { item: Movie }) => {
-    const [isPressed, setIsPressed] = useState(false);
     return (
       <Link
-        href="/movieDetail?movieId=${item.id}movieName=${item.title}"
+        href={{
+          pathname: "/movieDetail",
+          params: { id: item.id, title: item.title, imgUrl: item.posterURL },
+        }}
         asChild
       >
         <Pressable>

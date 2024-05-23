@@ -53,8 +53,8 @@ const styles = StyleSheet.create({
     marginBottom: 40,
   },
   titleImage: {
-    height: height * 0.16,
-    width,
+    height: height * 0.15,
+    width: width * 0.95,
     marginBottom: 5,
     resizeMode: "contain",
   },
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     width: 6,
     height: 6,
     borderRadius: 5,
-
+    marginHorizontal: 3,
     backgroundColor: "rgba(255, 255, 255, 0.5)", // Adjust color and opacity as needed
     // Adjust the position of the dots vertically
   },
