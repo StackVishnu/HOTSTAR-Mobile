@@ -6,8 +6,10 @@ import {
   FlatList,
   ActivityIndicator,
   Image,
+  Pressable,
 } from "react-native";
 import { fetchMovies, Movie } from "@/services/apiService";
+import { Link } from "expo-router";
 
 interface MovieGridProps {
   genre: string;
@@ -37,12 +39,22 @@ const MovieGrid: React.FC<MovieGridProps> = ({ genre }) => {
     loadMovies();
   }, []);
 
-  const renderItem = ({ item }: { item: Movie }) => (
-    <View style={styles.card}>
-      <Image source={{ uri: item.posterURL }} style={styles.poster} />
-    </View>
-  );
-  console.log(movies);
+  const renderItem = ({ item }: { item: Movie }) => {
+    const [isPressed, setIsPressed] = useState(false);
+    return (
+      <Link
+        href="/movieDetail?movieId=${item.id}movieName=${item.title}"
+        asChild
+      >
+        <Pressable>
+          <View style={styles.card}>
+            <Image source={{ uri: item.posterURL }} style={styles.poster} />
+          </View>
+        </Pressable>
+      </Link>
+    );
+  };
+  // console.log(movies);
   return (
     <View>
       <Text style={styles.scrollTitle}>{genre}</Text>

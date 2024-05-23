@@ -14,7 +14,7 @@ import { Entypo } from "@expo/vector-icons";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { fetchMovies, Movie } from "@/services/apiService";
-import SnapCarousel from "@/components/titleCarousel";
+import SnapCarousel from "@/components/TitleCarousel";
 import { titleData } from "@/data/movieData";
 const { width, height } = Dimensions.get("window");
 import MovieGrid from "@/components/MovieGrid";
