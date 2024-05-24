@@ -17,8 +17,8 @@ import { fetchMovies, Movie } from "@/services/apiService";
 import SnapCarousel from "@/components/TitleCarousel";
 import { titleData } from "@/data/movieData";
 import BrandCard from "@/components/specialCards";
-const { width, height } = Dimensions.get("window");
 import MovieGrid from "@/components/MovieGrid";
+const { width, height } = Dimensions.get("window");
 
 const App: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
