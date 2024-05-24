@@ -69,22 +69,12 @@ const App: React.FC = () => {
           <MovieGrid genre="Drama" />
         </View>
         <View style={styles.brandsContainer}>
-          <BrandCard img={specialCardsData[0].img} />
-          <View>
-            <Image source={specialCardsData[1].img} style={styles.brandCard} />
-          </View>
-          <View>
-            <Image source={specialCardsData[2].img} style={styles.brandCard} />
-          </View>
-          <View>
-            <Image source={specialCardsData[3].img} style={styles.brandCard} />
-          </View>
-          <View>
-            <Image source={specialCardsData[4].img} style={styles.brandCard} />
-          </View>
-          <View>
-            <Image source={specialCardsData[5].img} style={styles.brandCard} />
-          </View>
+          {specialCardsData.map((card, index) => (
+            <BrandCard key={index} img={card.img} />
+          ))}
+        </View>
+        <View style={styles.container2}>
+          <MovieGrid genre="Family" />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -184,13 +174,11 @@ const styles = StyleSheet.create({
   },
   brandsContainer: {
     flexDirection: "row",
-    alignItems: "center",
     justifyContent: "center",
     backgroundColor: "black",
     width,
     gap: 5,
     flexWrap: "wrap",
-    padding: 10,
   },
   brandCard: {
     height: 70,
