@@ -10,12 +10,13 @@ import {
   Dimensions,
 } from "react-native";
 import { AntDesign, Entypo } from "@expo/vector-icons";
-
+import { SpecialData, specialCardsData } from "@/data/spclData";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
 import { fetchMovies, Movie } from "@/services/apiService";
 import SnapCarousel from "@/components/TitleCarousel";
 import { titleData } from "@/data/movieData";
+import BrandCard from "@/components/specialCards";
 const { width, height } = Dimensions.get("window");
 import MovieGrid from "@/components/MovieGrid";
 
@@ -65,7 +66,25 @@ const App: React.FC = () => {
           <MovieGrid genre="Horror" />
         </View>
         <View style={styles.container2}>
-          <Image source={require("@/assets/images/favicon.png")}></Image>
+          <MovieGrid genre="Drama" />
+        </View>
+        <View style={styles.brandsContainer}>
+          <BrandCard img={specialCardsData[0].img} />
+          <View>
+            <Image source={specialCardsData[1].img} style={styles.brandCard} />
+          </View>
+          <View>
+            <Image source={specialCardsData[2].img} style={styles.brandCard} />
+          </View>
+          <View>
+            <Image source={specialCardsData[3].img} style={styles.brandCard} />
+          </View>
+          <View>
+            <Image source={specialCardsData[4].img} style={styles.brandCard} />
+          </View>
+          <View>
+            <Image source={specialCardsData[5].img} style={styles.brandCard} />
+          </View>
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -162,6 +181,23 @@ const styles = StyleSheet.create({
     paddingHorizontal: 12,
     paddingVertical: 10,
     borderRadius: 5,
+  },
+  brandsContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    justifyContent: "center",
+    backgroundColor: "black",
+    width,
+    gap: 5,
+    flexWrap: "wrap",
+    padding: 10,
+  },
+  brandCard: {
+    height: 70,
+    width: width * 0.3,
+    objectFit: "contain",
+    backgroundColor: "rgba(40, 40, 40, 1)",
+    borderRadius: 4,
   },
 });
 // const styles = StyleSheet.create({
