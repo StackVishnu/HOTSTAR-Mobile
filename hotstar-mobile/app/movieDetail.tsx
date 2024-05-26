@@ -1,9 +1,12 @@
+import React, { useState } from "react";
 import {
   StyleSheet,
   Dimensions,
   Image,
   TouchableOpacity,
   ScrollView,
+  Pressable,
+  Animated,
 } from "react-native";
 import {
   Entypo,
@@ -13,12 +16,31 @@ import {
   SimpleLineIcons,
 } from "@expo/vector-icons";
 import { Text, View } from "@/components/Themed";
+import { FavoritesProvider, useFavorites } from "@/contexts/favoritesContexts";
 import { useLocalSearchParams } from "expo-router";
 import MovieGrid from "@/components/MovieGrid";
+import { Movie } from "@/services/apiService";
 const { width, height } = Dimensions.get("window");
+
 export default function movieDetail() {
   const { id, title, imgUrl } = useLocalSearchParams();
-  console.log(imgUrl);
+  const { addFavorite, removeFavorite, isInFavorites } = useFavorites(); // Use the context hooks
+
+  const handleToggleFavorite = () => {
+    const posterURL = imgUrl;
+    const favorite: Movie = {
+      id: Number(id),
+      title: `${title}`,
+      posterURL: `${imgUrl}`,
+    };
+
+    if (isInFavorites(`${title}`)) {
+      removeFavorite(`${title}`);
+    } else {
+      addFavorite(favorite);
+    }
+  };
+
   return (
     <ScrollView>
       <View style={styles.container}>
@@ -48,12 +70,14 @@ export default function movieDetail() {
           </View>
           <View style={styles.icons}>
             <View style={styles.iconContainer}>
-              <AntDesign
-                name="plus"
-                size={25}
-                style={styles.icon}
-                color="white"
-              />
+              <Pressable onPress={handleToggleFavorite}>
+                <AntDesign
+                  name={isInFavorites(`${title}`) ? "star" : "staro"}
+                  size={25}
+                  style={styles.icon}
+                  color={"gold"}
+                />
+              </Pressable>
               <Text>{`Watchlist`}</Text>
             </View>
 

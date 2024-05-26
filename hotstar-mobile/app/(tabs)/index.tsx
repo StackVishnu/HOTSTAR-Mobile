@@ -16,7 +16,7 @@ import { StatusBar } from "expo-status-bar";
 import { fetchMovies, Movie } from "@/services/apiService";
 import SnapCarousel from "@/components/TitleCarousel";
 import { titleData } from "@/data/movieData";
-import BrandCard from "@/components/specialCards";
+import BrandCard from "@/components/SpecialCards";
 import MovieGrid from "@/components/MovieGrid";
 const { width, height } = Dimensions.get("window");
 

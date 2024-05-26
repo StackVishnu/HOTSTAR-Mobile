@@ -9,6 +9,7 @@ import {
   Pressable,
 } from "react-native";
 import { fetchMovies, Movie } from "@/services/apiService";
+import Row from "./RowComponent";
 import { Link } from "expo-router";
 
 interface MovieGridProps {
@@ -65,13 +66,7 @@ const MovieGrid: React.FC<MovieGridProps> = ({ genre }) => {
       ) : error ? (
         <Text style={styles.scrollTitle}>Error: {error}</Text>
       ) : (
-        <FlatList
-          data={movies}
-          horizontal
-          keyExtractor={(item) => item.id.toString()}
-          renderItem={renderItem}
-          contentContainerStyle={styles.listContent}
-        />
+        <Row arr={movies} />
       )}
     </View>
   );
