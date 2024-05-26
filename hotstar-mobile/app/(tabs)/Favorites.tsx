@@ -19,29 +19,32 @@ export default function TabTwoScreen() {
     <SafeAreaView style={styles.container}>
       <ScrollView>
         <View style={styles.favList}>
-          {/* <Row arr={favorites} /> */}
-          {favorites.map((item) => (
-            <Link
-              href={{
-                pathname: "/movieDetail",
-                params: {
-                  id: item.id,
-                  title: item.title,
-                  imgUrl: item.posterURL,
-                },
-              }}
-              asChild
-            >
-              <Pressable>
-                <View style={styles.card}>
-                  <Image
-                    source={{ uri: item.posterURL }}
-                    style={styles.poster}
-                  />
-                </View>
-              </Pressable>
-            </Link>
-          ))}
+          {favorites.length === 0 ? (
+            <Text style={styles.emptyMessage}>List is empty</Text>
+          ) : (
+            favorites.map((item) => (
+              <Link
+                href={{
+                  pathname: "/movieDetail",
+                  params: {
+                    id: item.id,
+                    title: item.title,
+                    imgUrl: item.posterURL,
+                  },
+                }}
+                asChild
+              >
+                <Pressable>
+                  <View style={styles.card}>
+                    <Image
+                      source={{ uri: item.posterURL }}
+                      style={styles.poster}
+                    />
+                  </View>
+                </Pressable>
+              </Link>
+            ))
+          )}
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -64,6 +67,10 @@ const styles = StyleSheet.create({
     gap: 10,
     padding: 20,
     backgroundColor: "black",
+  },
+  emptyMessage: {
+    fontSize: 20,
+    color: "white",
   },
   card: {
     backgroundColor: "black",

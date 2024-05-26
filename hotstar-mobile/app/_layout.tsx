@@ -8,12 +8,13 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import "react-native-reanimated";
 import { FavoritesProvider } from "@/contexts/favoritesContexts";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { useColorScheme } from "@/components/useColorScheme";
-
+import CustomHeader from "@/components/modalHeader";
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -56,16 +57,23 @@ function RootLayoutNav() {
 
   return (
     <FavoritesProvider>
-      <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-        <Stack>
-          <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-          <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-          <Stack.Screen
-            name="movieDetail"
-            options={{ presentation: "modal" }}
-          />
-        </Stack>
-      </ThemeProvider>
+      <SafeAreaProvider>
+        <ThemeProvider
+          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+        >
+          <Stack>
+            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+            <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+            <Stack.Screen
+              name="movieDetail"
+              options={{
+                presentation: "modal",
+                header: () => <CustomHeader title="Movie Detail" />,
+              }}
+            />
+          </Stack>
+        </ThemeProvider>
+      </SafeAreaProvider>
     </FavoritesProvider>
   );
 }
