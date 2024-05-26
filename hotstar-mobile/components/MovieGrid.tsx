@@ -40,23 +40,6 @@ const MovieGrid: React.FC<MovieGridProps> = ({ genre }) => {
     loadMovies();
   }, []);
 
-  const renderItem = ({ item }: { item: Movie }) => {
-    return (
-      <Link
-        href={{
-          pathname: "/movieDetail",
-          params: { id: item.id, title: item.title, imgUrl: item.posterURL },
-        }}
-        asChild
-      >
-        <Pressable>
-          <View style={styles.card}>
-            <Image source={{ uri: item.posterURL }} style={styles.poster} />
-          </View>
-        </Pressable>
-      </Link>
-    );
-  };
   // console.log(movies);
   return (
     <View>
@@ -96,9 +79,6 @@ const styles = StyleSheet.create({
     padding: 5,
     fontWeight: "bold",
     fontSize: 18,
-  },
-  listContent: {
-    padding: 10,
   },
 });
 

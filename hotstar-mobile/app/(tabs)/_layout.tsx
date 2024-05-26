@@ -39,11 +39,11 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="Favorites"
         options={{
-          title: "Search",
+          title: "Favorites",
           tabBarIcon: ({ color }) => (
-            <AntDesign name="search1" size={24} color={color} />
+            <AntDesign name="star" size={24} color={color} />
           ),
         }}
       />
