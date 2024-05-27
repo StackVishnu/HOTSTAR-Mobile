@@ -7,7 +7,7 @@ import {
   Dimensions,
   ImageSourcePropType,
 } from "react-native";
-import { SpecialData, specialCardsData } from "@/data/spclData";
+// import { SpecialData, specialCardsData } from "@/data/spclData";
 const { width, height } = Dimensions.get("window");
 
 interface BrandCardProps {

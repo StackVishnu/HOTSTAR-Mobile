@@ -7,14 +7,15 @@ import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
+import FavoriteHeader from "@/components/FavoriteModal";
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
+// function TabBarIcon(props: {
+//   name: React.ComponentProps<typeof FontAwesome>["name"];
+//   color: string;
+// }) {
+//   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+// }
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
@@ -45,6 +46,7 @@ export default function TabLayout() {
           tabBarIcon: ({ color }) => (
             <AntDesign name="star" size={24} color={color} />
           ),
+          header: () => <FavoriteHeader />,
         }}
       />
     </Tabs>

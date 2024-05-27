@@ -20,7 +20,7 @@ export default function TabTwoScreen() {
       <ScrollView>
         <View style={styles.favList}>
           {favorites.length === 0 ? (
-            <Text style={styles.emptyMessage}>List is empty</Text>
+            <Text style={styles.emptyMessage}>You dont have any Favorites</Text>
           ) : (
             favorites.map((item) => (
               <Link
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   },
   favList: {
     flex: 1,
-    alignContent: "center",
+    alignItems: "flex-end",
     justifyContent: "center",
     flexDirection: "row",
     flexWrap: "wrap",
@@ -71,6 +71,7 @@ const styles = StyleSheet.create({
   emptyMessage: {
     fontSize: 20,
     color: "white",
+    alignSelf: "center",
   },
   card: {
     backgroundColor: "black",

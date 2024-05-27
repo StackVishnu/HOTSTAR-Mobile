@@ -11,10 +11,10 @@ import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import "react-native-reanimated";
 import { FavoritesProvider } from "@/contexts/favoritesContexts";
-import { NavigationContainer } from "@react-navigation/native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { useColorScheme } from "@/components/useColorScheme";
-import CustomHeader from "@/components/modalHeader";
+// import { NavigationContainer } from "@react-navigation/native";
+// import { createNativeStackNavigator } from "@react-navigation/native-stack";
+// import { useColorScheme } from "@/components/useColorScheme";
+import DetailedHeader from "@/components/ModalHeader";
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -68,7 +68,7 @@ function RootLayoutNav() {
               name="movieDetail"
               options={{
                 presentation: "modal",
-                header: () => <CustomHeader title="Movie Detail" />,
+                header: () => <DetailedHeader />,
               }}
             />
           </Stack>

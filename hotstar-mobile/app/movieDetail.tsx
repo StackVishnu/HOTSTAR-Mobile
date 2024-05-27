@@ -20,6 +20,7 @@ import { FavoritesProvider, useFavorites } from "@/contexts/favoritesContexts";
 import { useLocalSearchParams } from "expo-router";
 import MovieGrid from "@/components/MovieGrid";
 import { Movie } from "@/services/apiService";
+import Constants from "expo-constants";
 const { width, height } = Dimensions.get("window");
 
 export default function movieDetail() {
@@ -27,7 +28,6 @@ export default function movieDetail() {
   const { addFavorite, removeFavorite, isInFavorites } = useFavorites(); // Use the context hooks
 
   const handleToggleFavorite = () => {
-    const posterURL = imgUrl;
     const favorite: Movie = {
       id: Number(id),
       title: `${title}`,
@@ -42,7 +42,7 @@ export default function movieDetail() {
   };
 
   return (
-    <ScrollView>
+    <ScrollView style={{ marginVertical: Constants.statusBarHeight }}>
       <View style={styles.container}>
         <View style={styles.mainDescription}>
           <View style={styles.banner}>

@@ -1,15 +1,22 @@
 // components/CustomHeader.tsx
 import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+  Dimensions,
+} from "react-native";
 import { useNavigation } from "@react-navigation/native";
 import { Entypo } from "@expo/vector-icons";
+
 import { useSafeAreaInsets } from "react-native-safe-area-context";
+const { width, height } = Dimensions.get("window");
+// interface CustomHeaderProps {
+//   title: string;
+// }
 
-interface CustomHeaderProps {
-  title: string;
-}
-
-const CustomHeader: React.FC<CustomHeaderProps> = ({ title }) => {
+const DetailedHeader = () => {
   const navigation = useNavigation();
   const insets = useSafeAreaInsets();
   return (
@@ -18,7 +25,7 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({ title }) => {
         onPress={() => navigation.goBack()}
         style={styles.backBtn}
       >
-        <Entypo name="cross" size={24} color="white" />
+        <Entypo name="cross" size={30} color="white" />
       </TouchableOpacity>
     </View>
   );
@@ -26,15 +33,13 @@ const CustomHeader: React.FC<CustomHeaderProps> = ({ title }) => {
 
 const styles = StyleSheet.create({
   headerContainer: {
-    flex: 1,
     position: "absolute",
-    justifyContent: "flex-end",
+    marginLeft: width * 0.85,
+    padding: 10,
     backgroundColor: "rgba(0, 0, 0, 0)",
   },
 
-  backBtn: {
-    padding: 20,
-  },
+  backBtn: {},
 });
 
-export default CustomHeader;
+export default DetailedHeader;
