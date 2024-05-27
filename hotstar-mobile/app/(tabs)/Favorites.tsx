@@ -9,7 +9,6 @@ import {
 import { Link } from "expo-router";
 import { useFavorites } from "@/contexts/favoritesContexts";
 import { Text, View } from "@/components/Themed";
-import Row from "@/components/RowComponent";
 const { width, height } = Dimensions.get("window");
 
 export default function TabTwoScreen() {
@@ -79,9 +78,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   poster: {
-    width: 100,
-    height: 150,
-    resizeMode: "contain",
+    width: 150,
+    height: 200,
+    objectFit: "fill",
     borderRadius: 10,
   },
   title: {

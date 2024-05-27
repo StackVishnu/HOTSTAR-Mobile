@@ -40,6 +40,15 @@ export default function TabLayout() {
         }}
       />
       <Tabs.Screen
+        name="search"
+        options={{
+          title: "Search",
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="search1" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
         name="Favorites"
         options={{
           title: "Favorites",
