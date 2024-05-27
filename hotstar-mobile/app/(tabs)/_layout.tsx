@@ -1,7 +1,7 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
-import { Pressable, Image, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import CustomHeader from "@/components/CustomHeader";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";

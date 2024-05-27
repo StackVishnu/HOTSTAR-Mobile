@@ -21,8 +21,9 @@ export default function TabTwoScreen() {
           {favorites.length === 0 ? (
             <Text style={styles.emptyMessage}>You dont have any Favorites</Text>
           ) : (
-            favorites.map((item) => (
+            favorites.map((item, index) => (
               <Link
+                key={item.id + index}
                 href={{
                   pathname: "/movieDetail",
                   params: {
