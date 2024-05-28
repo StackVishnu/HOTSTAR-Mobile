@@ -8,9 +8,9 @@ import {
   Image,
   Pressable,
 } from "react-native";
+import { useSearch } from "@/contexts/searchContext";
 import { fetchMovies, Movie } from "@/services/apiService";
 import Row from "./RowComponent";
-import { Link } from "expo-router";
 
 interface MovieGridProps {
   genre: string;
@@ -20,12 +20,13 @@ const MovieGrid: React.FC<MovieGridProps> = ({ genre }) => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
-
+  const { addSearch, searchArr } = useSearch();
   useEffect(() => {
     const loadMovies = async () => {
       try {
         const result = await fetchMovies(genre);
         setMovies(result);
+        addSearch(movies);
       } catch (error) {
         if (error instanceof Error) {
           setError(error.message);
@@ -40,7 +41,7 @@ const MovieGrid: React.FC<MovieGridProps> = ({ genre }) => {
     loadMovies();
   }, []);
 
-  // console.log(movies);
+  console.log(searchArr);
   return (
     <View>
       <Text style={styles.scrollTitle}>{genre}</Text>

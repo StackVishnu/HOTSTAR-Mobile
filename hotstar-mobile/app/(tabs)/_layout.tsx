@@ -3,12 +3,14 @@ import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
 import { Platform, StyleSheet } from "react-native";
 import CustomHeader from "@/components/CustomHeader";
+import { Badge } from "@rneui/base";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
 import { MaterialIcons, AntDesign } from "@expo/vector-icons";
 import FavoriteHeader from "@/components/FavoriteModal";
-
+import { useFavorites } from "@/contexts/favoritesContexts";
+import { View } from "@/components/Themed";
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 // function TabBarIcon(props: {
 //   name: React.ComponentProps<typeof FontAwesome>["name"];
@@ -19,7 +21,7 @@ import FavoriteHeader from "@/components/FavoriteModal";
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-
+  const { favorites } = useFavorites();
   return (
     <Tabs
       screenOptions={{
@@ -51,9 +53,20 @@ export default function TabLayout() {
       <Tabs.Screen
         name="Favorites"
         options={{
-          title: "Favorites",
+          title: `Favorites: ${favorites.length} `,
           tabBarIcon: ({ color }) => (
-            <AntDesign name="star" size={24} color={color} />
+            <View style={{ backgroundColor: "transparent" }}>
+              <AntDesign name="star" size={24} color={color} />
+              <Badge
+                value={`${favorites.length}`}
+                status="primary"
+                containerStyle={{
+                  position: "absolute",
+                  top: -10,
+                  right: -10,
+                }}
+              />
+            </View>
           ),
           header: () => <FavoriteHeader />,
         }}

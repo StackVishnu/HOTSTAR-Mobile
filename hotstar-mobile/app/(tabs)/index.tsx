@@ -10,10 +10,9 @@ import {
   Dimensions,
 } from "react-native";
 import { AntDesign, Entypo } from "@expo/vector-icons";
-import { SpecialData, specialCardsData } from "@/data/spclData";
+import { specialCardsData } from "@/data/spclData";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
-import { fetchMovies, Movie } from "@/services/apiService";
 import SnapCarousel from "@/components/TitleCarousel";
 import { titleData } from "@/data/movieData";
 import BrandCard from "@/components/SpecialCards";

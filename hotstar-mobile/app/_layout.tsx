@@ -11,9 +11,7 @@ import { useEffect } from "react";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import "react-native-reanimated";
 import { FavoritesProvider } from "@/contexts/favoritesContexts";
-// import { NavigationContainer } from "@react-navigation/native";
-// import { createNativeStackNavigator } from "@react-navigation/native-stack";
-// import { useColorScheme } from "@/components/useColorScheme";
+import { SearchProvider } from "@/contexts/searchContext";
 import DetailedHeader from "@/components/ModalHeader";
 export {
   // Catch any errors thrown by the Layout component.
@@ -57,23 +55,25 @@ function RootLayoutNav() {
 
   return (
     <FavoritesProvider>
-      <SafeAreaProvider>
-        <ThemeProvider
-          value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
-        >
-          <Stack>
-            <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-            <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-            <Stack.Screen
-              name="movieDetail"
-              options={{
-                presentation: "modal",
-                header: () => <DetailedHeader />,
-              }}
-            />
-          </Stack>
-        </ThemeProvider>
-      </SafeAreaProvider>
+      <SearchProvider>
+        <SafeAreaProvider>
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+              <Stack.Screen
+                name="movieDetail"
+                options={{
+                  presentation: "modal",
+                  header: () => <DetailedHeader />,
+                }}
+              />
+            </Stack>
+          </ThemeProvider>
+        </SafeAreaProvider>
+      </SearchProvider>
     </FavoritesProvider>
   );
 }

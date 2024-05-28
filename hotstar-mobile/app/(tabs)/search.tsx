@@ -86,8 +86,9 @@ export default function SearchScreen() {
       <ScrollView>
         <View style={styles.list}>
           {filteredMovies.length > 0 ? (
-            filteredMovies.map((movie) => (
+            filteredMovies.map((movie, index) => (
               <Link
+                key={`${index} + ${movie.id}`}
                 href={{
                   pathname: "/movieDetail",
                   params: {
