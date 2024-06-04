@@ -37,14 +37,14 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Semi-transparent background
+    backgroundColor: "rgba(0, 0, 0, 0)", // Semi-transparent background
     padding: 10,
 
     zIndex: 1, // Ensure the header is on top of the content
   },
   headerImg: {
-    width: 40,
-    height: 40,
+    width: 50,
+    height: 50,
     marginLeft: 5,
   },
   subscribeButton: {

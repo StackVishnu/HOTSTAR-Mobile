@@ -4,9 +4,12 @@ export interface Movie {
   posterURL: string;
 }
 
-export const fetchMovies = async (): Promise<Movie[]> => {
+export const fetchMovies = async (genre: string): Promise<Movie[]> => {
+  console.log(genre);
   try {
-    const response = await fetch("https://api.sampleapis.com/movies/animation");
+    const response = await fetch(
+      `https://api.sampleapis.com/movies/${genre.toLowerCase()}`
+    );
     if (!response.ok) {
       throw new Error("Network response was not ok");
     }

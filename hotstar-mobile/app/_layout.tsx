@@ -8,10 +8,11 @@ import { useFonts } from "expo-font";
 import { Stack } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
 import { useEffect } from "react";
+import { SafeAreaProvider } from "react-native-safe-area-context";
 import "react-native-reanimated";
-
-import { useColorScheme } from "@/components/useColorScheme";
-
+import { FavoritesProvider } from "@/contexts/favoritesContexts";
+import { SearchProvider } from "@/contexts/searchContext";
+import DetailedHeader from "@/components/ModalHeader";
 export {
   // Catch any errors thrown by the Layout component.
   ErrorBoundary,
@@ -53,11 +54,26 @@ function RootLayoutNav() {
   const colorScheme = "dark";
 
   return (
-    <ThemeProvider value={colorScheme === "dark" ? DarkTheme : DefaultTheme}>
-      <Stack>
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: "modal" }} />
-      </Stack>
-    </ThemeProvider>
+    <FavoritesProvider>
+      <SearchProvider>
+        <SafeAreaProvider>
+          <ThemeProvider
+            value={colorScheme === "dark" ? DarkTheme : DefaultTheme}
+          >
+            <Stack>
+              <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+              <Stack.Screen name="modal" options={{ presentation: "modal" }} />
+              <Stack.Screen
+                name="movieDetail"
+                options={{
+                  presentation: "modal",
+                  header: () => <DetailedHeader />,
+                }}
+              />
+            </Stack>
+          </ThemeProvider>
+        </SafeAreaProvider>
+      </SearchProvider>
+    </FavoritesProvider>
   );
 }

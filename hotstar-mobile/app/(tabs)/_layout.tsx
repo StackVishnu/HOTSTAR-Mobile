@@ -1,32 +1,27 @@
 import React from "react";
 import FontAwesome from "@expo/vector-icons/FontAwesome";
 import { Link, Tabs } from "expo-router";
-import { Pressable, Image, StyleSheet, Text, View } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 import CustomHeader from "@/components/CustomHeader";
+import { Badge } from "@rneui/base";
 import Colors from "@/constants/Colors";
 import { useColorScheme } from "@/components/useColorScheme";
 import { useClientOnlyValue } from "@/components/useClientOnlyValue";
-
+import { MaterialIcons, AntDesign } from "@expo/vector-icons";
+import FavoriteHeader from "@/components/FavoriteModal";
+import { useFavorites } from "@/contexts/favoritesContexts";
+import { View } from "@/components/Themed";
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
-function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
-  color: string;
-}) {
-  return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
-}
-type ImgHeaderProps = {
-  src: any;
-  style?: object;
-};
-function ImageHeader({ src, style }: ImgHeaderProps) {
-  return <Image source={src} style={style} />;
-}
+// function TabBarIcon(props: {
+//   name: React.ComponentProps<typeof FontAwesome>["name"];
+//   color: string;
+// }) {
+//   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
+// }
 
 export default function TabLayout() {
   const colorScheme = useColorScheme();
-  const headerImgSrc = require("@/assets/images/disney-logo.png");
-  const headerImgStyle = styles.headerImg;
-
+  const { favorites } = useFavorites();
   return (
     <Tabs
       screenOptions={{
@@ -39,16 +34,41 @@ export default function TabLayout() {
       <Tabs.Screen
         name="index"
         options={{
-          title: "tab ",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Home",
+          tabBarIcon: ({ color }) => (
+            <MaterialIcons name="home-filled" size={24} color={color} />
+          ),
           header: () => <CustomHeader />,
         }}
       />
       <Tabs.Screen
-        name="two"
+        name="search"
         options={{
-          title: "Tab Two",
-          tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
+          title: "Search",
+          tabBarIcon: ({ color }) => (
+            <AntDesign name="search1" size={24} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="Favorites"
+        options={{
+          title: `Favorites: ${favorites.length} `,
+          tabBarIcon: ({ color }) => (
+            <View style={{ backgroundColor: "transparent" }}>
+              <AntDesign name="star" size={24} color={color} />
+              <Badge
+                value={`${favorites.length}`}
+                status="primary"
+                containerStyle={{
+                  position: "absolute",
+                  top: -10,
+                  right: -10,
+                }}
+              />
+            </View>
+          ),
+          header: () => <FavoriteHeader />,
         }}
       />
     </Tabs>

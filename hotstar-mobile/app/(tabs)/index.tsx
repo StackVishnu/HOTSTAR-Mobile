@@ -3,74 +3,82 @@ import {
   StyleSheet,
   View,
   Text,
-  FlatList,
-  ActivityIndicator,
   SafeAreaView,
   Image,
   ScrollView,
+  TouchableOpacity,
+  Dimensions,
 } from "react-native";
+import { AntDesign, Entypo } from "@expo/vector-icons";
+import { specialCardsData } from "@/data/spclData";
+import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
+<<<<<<< HEAD
 import { fetchMovies, Movie } from "@/services/apiService";
 import { titleData } from "@/data/movieData";
+=======
+import SnapCarousel from "@/components/TitleCarousel";
+import { titleData } from "@/data/movieData";
+import BrandCard from "@/components/SpecialCards";
+import MovieGrid from "@/components/MovieGrid";
+const { width, height } = Dimensions.get("window");
+>>>>>>> main
 
 const App: React.FC = () => {
-  const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<string | null>(null);
+  const [currentIndex, setCurrentIndex] = useState<number>(0);
 
-  useEffect(() => {
-    const loadMovies = async () => {
-      try {
-        const result = await fetchMovies();
-        setMovies(result);
-      } catch (error) {
-        if (error instanceof Error) {
-          setError(error.message);
-        } else {
-          setError("An unknown error occurred");
-        }
-      } finally {
-        setLoading(false);
-      }
-    };
+  const handleSnapToItem = (index: number) => {
+    setCurrentIndex(index);
+  };
 
-    loadMovies();
-  }, []);
-
-  const renderItem = ({ item }: { item: Movie }) => (
-    <View style={styles.card}>
-      {/* <Text style={styles.title}>{item.title}</Text> */}
-      <Image source={{ uri: item.posterURL }} style={styles.poster} />
-    </View>
-  );
   return (
     <SafeAreaView style={styles.safeArea}>
       <StatusBar style="light" />
       <ScrollView contentContainerStyle={styles.scrollViewContent}>
         <View style={styles.container}>
-          <Image source={require("@/assets/images/favicon.png")}></Image>
+          <Image
+            source={{
+              uri: titleData[currentIndex].bgImg,
+            }}
+            style={styles.bgImg}
+          />
+          <LinearGradient
+            colors={["transparent", "rgba(0,0,0,1)"]}
+            style={styles.gradient}
+          />
+          <SnapCarousel data={titleData} onSnapToItem={handleSnapToItem} />
+
+          <View style={styles.subscribeBtn}>
+            <TouchableOpacity style={styles.btnContainer}>
+              <Text style={styles.btn1}>
+                <Entypo name="controller-play" size={16} color="white" />
+                Watch Now
+              </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity style={styles.btnContainer}>
+              <Text style={styles.btn2}>
+                <AntDesign name="plus" size={20} color="white" />
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
         <View style={styles.container2}>
-          <Text style={styles.scrollTitle}>Latest</Text>
-          {loading ? (
-            <ActivityIndicator size="large" color="#0000ff" />
-          ) : error ? (
-            <Text style={styles.scrollTitle}>Error: {error}</Text>
-          ) : (
-            <FlatList
-              data={movies}
-              horizontal
-              keyExtractor={(item) => item.id.toString()}
-              renderItem={renderItem}
-              contentContainerStyle={styles.listContent}
-            />
-          )}
+          <MovieGrid genre="Animation" />
         </View>
         <View style={styles.container2}>
-          <Image source={require("@/assets/images/favicon.png")}></Image>
+          <MovieGrid genre="Horror" />
         </View>
         <View style={styles.container2}>
-          <Image source={require("@/assets/images/favicon.png")}></Image>
+          <MovieGrid genre="Drama" />
+        </View>
+        <View style={styles.brandsContainer}>
+          {specialCardsData.map((card, index) => (
+            <BrandCard key={index} img={card.img} />
+          ))}
+        </View>
+        <View style={styles.container2}>
+          <MovieGrid genre="Family" />
         </View>
       </ScrollView>
     </SafeAreaView>
@@ -82,29 +90,32 @@ const styles = StyleSheet.create({
   },
   scrollViewContent: {
     flexGrow: 1,
-
-    paddingVertical: 20,
+    paddingVertical: height * 0.03,
+  },
+  gradient: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 100,
+    height: "50%",
   },
   container: {
-    flex: 3,
     width: "100%",
-    height: 400,
+    height: 500,
     alignItems: "center",
-    backgroundColor: "red",
+    backgroundColor: "black",
   },
   container2: {
     flex: 1,
     width: "100%",
     height: 220,
     alignItems: "center",
-    borderColor: "white",
-    borderWidth: 1,
   },
 
   image: {
-    width: 100,
+    width: "100%",
     height: 100,
-    resizeMode: "contain",
+    objectFit: "cover",
   },
   itemText: {
     marginTop: 10,
@@ -137,6 +148,48 @@ const styles = StyleSheet.create({
   },
   listContent: {
     padding: 10,
+  },
+  subscribeBtn: {
+    flexDirection: "row",
+    position: "absolute",
+    bottom: 40,
+  },
+  bgImg: {
+    position: "absolute",
+    height: "80%",
+    width: "100%",
+  },
+  btnContainer: {
+    padding: 10,
+  },
+  btn1: {
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    color: "white",
+    paddingHorizontal: 40,
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  btn2: {
+    backgroundColor: "rgba(255, 255, 255, 0.2)",
+    color: "white",
+    paddingHorizontal: 12,
+    paddingVertical: 10,
+    borderRadius: 5,
+  },
+  brandsContainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    backgroundColor: "black",
+    width,
+    gap: 5,
+    flexWrap: "wrap",
+  },
+  brandCard: {
+    height: 70,
+    width: width * 0.3,
+    objectFit: "contain",
+    backgroundColor: "rgba(40, 40, 40, 1)",
+    borderRadius: 4,
   },
 });
 // const styles = StyleSheet.create({
