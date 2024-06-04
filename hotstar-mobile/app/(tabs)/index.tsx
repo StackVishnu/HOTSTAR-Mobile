@@ -13,16 +13,11 @@ import { AntDesign, Entypo } from "@expo/vector-icons";
 import { specialCardsData } from "@/data/spclData";
 import { LinearGradient } from "expo-linear-gradient";
 import { StatusBar } from "expo-status-bar";
-<<<<<<< HEAD
-import { fetchMovies, Movie } from "@/services/apiService";
-import { titleData } from "@/data/movieData";
-=======
 import SnapCarousel from "@/components/TitleCarousel";
 import { titleData } from "@/data/movieData";
 import BrandCard from "@/components/SpecialCards";
 import MovieGrid from "@/components/MovieGrid";
 const { width, height } = Dimensions.get("window");
->>>>>>> main
 
 const App: React.FC = () => {
   const [currentIndex, setCurrentIndex] = useState<number>(0);
